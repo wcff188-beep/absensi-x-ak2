@@ -1,5 +1,5 @@
 // config.js
 const CONFIG = {
     // Ganti dengan URL Web App dari Google Apps Script setelah deploy
-    SCRIPT_URL: "https://script.google.com/macros/s/AKfycbx-pAC9Bm7nJlhT00geE3D0pzt_TBkZ5uQADVwwNJC8xmnca4xchj5jvLG2zLV277rXdw/exec"
+    SCRIPT_URL: "https://script.google.com/macros/s/AKfycbzW3UrNpQs9-mWMBe_Fwf8_82Z_oIkzHgQH6SrE7YyNBSR3hYMeKn2ZUx9yg6b2-DpNDQ/exec"
 };
