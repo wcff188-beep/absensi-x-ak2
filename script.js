@@ -13,17 +13,15 @@ document.getElementById('absensiForm').addEventListener('submit', async function
     const btn = document.getElementById('submitBtn');
     const notif = document.getElementById('notification');
 
-    // Ambil data
+    // Ambil data langsung menggunakan FormData
     const formData = new FormData(form);
-    const data = {
-        nama: formData.get('nama'),
-        no_absen: formData.get('no_absen'),
-        status: formData.get('status'),
-        perangkat: getDeviceType()
-    };
+    const no_absen = formData.get('no_absen');
+    
+    // Tambahkan info perangkat ke dalam formData agar ikut terkirim
+    formData.append('perangkat', getDeviceType());
 
     // Validasi Nomor Absen
-    if(data.no_absen < 1 || data.no_absen > 36) {
+    if(no_absen < 1 || no_absen > 36) {
         showNotif('Nomor absen harus antara 1 sampai 36.', 'error');
         return;
     }
@@ -34,20 +32,21 @@ document.getElementById('absensiForm').addEventListener('submit', async function
     notif.className = "notification hidden";
 
     try {
-        // Karena GAS sering bermasalah dengan CORS jika menggunakan POST JSON standar,
-        // Kita membungkusnya ke form-urlencoded text/plain
+        // Mengirim menggunakan format FormData agar otomatis dibaca sebagai e.parameter oleh GAS
         const response = await fetch(CONFIG.SCRIPT_URL, {
             method: 'POST',
-            body: JSON.stringify(data)
+            body: formData
         });
 
-        const result = await response.json();
+        // Karena GAS me-return ContentService.createTextOutput("Success"),
+        // kita harus menangkapnya sebagai text(), bukan json()
+        const resultText = await response.text();
 
-        if (result.status === 'success') {
-            showNotif(result.message, 'success');
+        if (resultText === 'Success') {
+            showNotif('Data absen berhasil terkirim!', 'success');
             form.reset();
         } else {
-            showNotif(result.message, 'error');
+            showNotif('Gagal mengirim data. Coba lagi.', 'error');
         }
     } catch (error) {
         showNotif('Terjadi kesalahan koneksi. Silakan coba lagi.', 'error');
