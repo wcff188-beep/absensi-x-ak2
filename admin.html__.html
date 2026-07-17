@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Absensi X AK 2</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
+        
+        body {
+            background-image: url('206705_2.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            padding-bottom: 80px; 
+        }
+
+        .top-bg {
+            background-color: rgba(198, 40, 40, 0.85); 
+            color: white; text-align: center; padding: 40px 20px 90px 20px;
+            border-bottom-left-radius: 40px; border-bottom-right-radius: 40px; 
+        }
+
+        .top-bg h1 { font-size: 24px; font-weight: 700; margin-bottom: 5px; }
+        .top-bg p { font-size: 14px; opacity: 0.9; }
+
+        .card-container {
+            background: rgba(255, 255, 255, 0.85); 
+            backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); 
+            margin: -60px 20px 20px 20px; padding: 25px 20px;
+            border-radius: 20px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            position: relative; z-index: 10; border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .card-header {
+            font-size: 18px; font-weight: 700; color: #c62828; 
+            margin-bottom: 25px; display: flex; align-items: center; gap: 8px; justify-content: space-between;
+        }
+
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; font-size: 15px; font-weight: 700; color: #444; margin-bottom: 8px; }
+        .form-group input {
+            width: 100%; padding: 14px 16px; border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 12px; font-size: 15px; outline: none; transition: border-color 0.3s;
+            background-color: rgba(255, 255, 255, 0.9); color: #333;
+        }
+        .form-group input:focus { border-color: #c62828; }
+
+        button {
+            width: 100%; padding: 16px; background-color: #d32f2f; 
+            color: white; border: none; border-radius: 12px; font-size: 16px; font-weight: 700;
+            cursor: pointer; transition: background 0.3s;
+        }
+        button:hover { background-color: #b71c1c; }
+        button.btn-small { padding: 8px 12px; font-size: 13px; width: auto; border-radius: 8px; background-color: #555; }
+        button.btn-small:hover { background-color: #333; }
+
+        .table-responsive { 
+            overflow-x: auto; margin-top: 15px; 
+            background: rgba(255,255,255,0.9); border-radius: 10px; padding: 10px; 
+        }
+        table { width: 100%; border-collapse: collapse; font-size: 13px; }
+        th { text-align: left; padding: 10px 5px; border-bottom: 2px solid #c62828; color: #c62828; }
+        td { padding: 10px 5px; border-bottom: 1px solid #eee; color: #333; }
+        
+        .notification { margin-top: 15px; padding: 12px; border-radius: 10px; text-align: center; font-size: 14px; font-weight: 600; display: none; }
+        .notification.error { background-color: #ffebee; color: #c62828; display: block; }
+
+        .bottom-nav {
+            position: fixed; bottom: 0; left: 0; width: 100%; background-color: #ffffff;
+            display: flex; justify-content: space-around; padding: 12px 0 15px 0;
+            box-shadow: 0 -4px 10px rgba(0,0,0,0.03); z-index: 100;
+        }
+        .nav-item { text-decoration: none; display: flex; flex-direction: column; align-items: center; color: #9e9e9e; font-size: 13px; font-weight: 600; gap: 5px; }
+        .nav-item.active { color: #c62828; }
+        .nav-item.active .nav-icon { opacity: 1; }
+        .nav-icon { font-size: 22px; opacity: 0.7; }
+    </style>
+</head>
+<body>
+    <div class="top-bg">
+        <h1>PANEL ADMIN</h1>
+        <p>Pengurus X AK 2</p>
+    </div>
+
+    <div class="card-container" id="loginSection">
+        <div class="card-header">
+            <div>🔒 <span>Login Pengurus</span></div>
+        </div>
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" placeholder="Masukkan username..." required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="Masukkan password..." required>
+            </div>
+            <button type="submit">Masuk</button>
+            <div id="loginError" class="notification error" style="display: none;">Username atau Password salah!</div>
+        </form>
+    </div>
+
+    <div class="card-container" id="dashboardSection" style="display: none;">
+        <div class="card-header">
+            <div>📊 <span>Data Hari Ini</span></div>
+            <button id="logoutBtn" class="btn-small">Logout</button>
+        </div>
+        
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Jam</th>
+                        <th>Nama</th>
+                        <th>No</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    <tr><td colspan="4" style="text-align: center; padding: 20px;">Memuat data...</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="bottom-nav">
+        <a href="./index.html" class="nav-item">
+            <span class="nav-icon">📝</span>
+            <span class="nav-text">Absen</span>
+        </a>
+        <a href="./admin.html" class="nav-item active">
+            <span class="nav-icon">⚙️</span>
+            <span class="nav-text">Admin</span>
+        </a>
+    </div>
+
+    <script src="config.js"></script>
+    <script>
+        const loginSection = document.getElementById('loginSection');
+        const dashboardSection = document.getElementById('dashboardSection');
+        const loginForm = document.getElementById('loginForm');
+        const loginError = document.getElementById('loginError');
+        const logoutBtn = document.getElementById('logoutBtn');
+
+        if (sessionStorage.getItem('isAdminLoggedIn') === 'true') { showDashboard(); }
+
+        loginForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            if (document.getElementById('username').value === "AK2 GACOR" && document.getElementById('password').value === "Adadeh") {
+                sessionStorage.setItem('isAdminLoggedIn', 'true');
+                showDashboard();
+            } else {
+                loginError.style.display = 'block';
+                setTimeout(() => { loginError.style.display = 'none'; }, 3000);
+            }
+        });
+
+        logoutBtn.addEventListener('click', function() {
+            sessionStorage.removeItem('isAdminLoggedIn');
+            location.reload();
+        });
+
+        function showDashboard() {
+            loginSection.style.display = 'none';
+            dashboardSection.style.display = 'block';
+            fetchAdminData();
+        }
+
+        async function fetchAdminData() {
+            const tbody = document.getElementById('tableBody');
+            try {
+                const response = await fetch(`${CONFIG.SCRIPT_URL}?action=getToday`);
+                const result = await response.json();
+                if (result.status === 'success') {
+                    tbody.innerHTML = result.data.length === 0 ? '<tr><td colspan="4" style="text-align: center; padding: 20px;">Belum ada absensi.</td></tr>' : '';
+                    result.data.reverse().forEach(row => {
+                        const tr = document.createElement('tr');
+                        tr.innerHTML = `<td>${row[0].split(' ')[1]}</td><td>${row[1]}</td><td>${row[2]}</td><td><strong>${row[3]}</strong></td>`;
+                        tbody.appendChild(tr);
+                    });
+                }
+            } catch (error) { tbody.innerHTML = '<tr><td colspan="4" style="text-align: center; color: red; padding: 20px;">Gagal memuat data.</td></tr>'; }
+        }
+    </script>
+</body>
+</html>
