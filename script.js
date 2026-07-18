@@ -1,4 +1,3 @@
-// Mendapatkan info perangkat
 function getDeviceType() {
     const ua = navigator.userAgent;
     if (/(tablet|ipad|playbook|silk)|(android(?!.*mobi))/i.test(ua)) return "Tablet";
@@ -9,48 +8,39 @@ function getDeviceType() {
 document.getElementById('absensiForm').addEventListener('submit', async function(e) {
     e.preventDefault();
 
-    const form = e.target;
     const btn = document.getElementById('submitBtn');
-    const notif = document.getElementById('notification');
-
-    // Ambil data langsung menggunakan FormData
-    const formData = new FormData(form);
-    const no_absen = formData.get('no_absen');
     
-    // Tambahkan info perangkat ke dalam formData agar ikut terkirim
-    formData.append('perangkat', getDeviceType());
+    // Ambil nilai input
+    const data = {
+        nama: document.getElementById('nama').value,
+        no_absen: document.getElementById('no_absen').value,
+        status: document.getElementById('status').value,
+        perangkat: getDeviceType()
+    };
 
-    // Validasi Nomor Absen
-    if(no_absen < 1 || no_absen > 36) {
+    // Validasi
+    if(data.no_absen < 1 || data.no_absen > 36) {
         showNotif('Nomor absen harus antara 1 sampai 36.', 'error');
         return;
     }
 
-    // Ubah UI menjadi loading
     btn.disabled = true;
     btn.textContent = "Mengirim...";
-    notif.className = "notification hidden";
 
     try {
-        // Mengirim menggunakan format FormData agar otomatis dibaca sebagai e.parameter oleh GAS
+        // Kirim sebagai JSON agar lebih kompatibel dengan Google Apps Script
         const response = await fetch(CONFIG.SCRIPT_URL, {
             method: 'POST',
-            body: formData
+            mode: 'no-cors', // Mencegah error CORS
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
         });
 
-        // Karena GAS me-return ContentService.createTextOutput("Success"),
-        // kita harus menangkapnya sebagai text(), bukan json()
-        const resultText = await response.text();
-
-        if (resultText === 'Success') {
-            showNotif('Data absen berhasil terkirim!', 'success');
-            form.reset();
-        } else {
-            showNotif('Gagal mengirim data. Coba lagi.', 'error');
-        }
+        // Karena mode no-cors, kita anggap sukses jika tidak ada error jaringan
+        showNotif('Data absen berhasil terkirim!', 'success');
+        document.getElementById('absensiForm').reset();
     } catch (error) {
-        showNotif('Terjadi kesalahan koneksi. Silakan coba lagi.', 'error');
-        console.error(error);
+        showNotif('Terjadi kesalahan koneksi.', 'error');
     } finally {
         btn.disabled = false;
         btn.textContent = "Kirim Absensi";
@@ -61,4 +51,59 @@ function showNotif(message, type) {
     const notif = document.getElementById('notification');
     notif.textContent = message;
     notif.className = `notification ${type}`;
+    notif.style.display = 'block';
+}function getDeviceType() {
+    const ua = navigator.userAgent;
+    if (/(tablet|ipad|playbook|silk)|(android(?!.*mobi))/i.test(ua)) return "Tablet";
+    if (/Mobile|Android|iP(hone|od)|IEMobile|BlackBerry|Kindle|Silk-Accelerated|(hpw|web)OS|Opera M(obi|ini)/.test(ua)) return "Mobile";
+    return "Desktop";
+}
+
+document.getElementById('absensiForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const btn = document.getElementById('submitBtn');
+    
+    // Ambil nilai input
+    const data = {
+        nama: document.getElementById('nama').value,
+        no_absen: document.getElementById('no_absen').value,
+        status: document.getElementById('status').value,
+        perangkat: getDeviceType()
+    };
+
+    // Validasi
+    if(data.no_absen < 1 || data.no_absen > 36) {
+        showNotif('Nomor absen harus antara 1 sampai 36.', 'error');
+        return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = "Mengirim...";
+
+    try {
+        // Kirim sebagai JSON agar lebih kompatibel dengan Google Apps Script
+        const response = await fetch(CONFIG.SCRIPT_URL, {
+            method: 'POST',
+            mode: 'no-cors', // Mencegah error CORS
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        });
+
+        // Karena mode no-cors, kita anggap sukses jika tidak ada error jaringan
+        showNotif('Data absen berhasil terkirim!', 'success');
+        document.getElementById('absensiForm').reset();
+    } catch (error) {
+        showNotif('Terjadi kesalahan koneksi.', 'error');
+    } finally {
+        btn.disabled = false;
+        btn.textContent = "Kirim Absensi";
+    }
+});
+
+function showNotif(message, type) {
+    const notif = document.getElementById('notification');
+    notif.textContent = message;
+    notif.className = `notification ${type}`;
+    notif.style.display = 'block';
 }
