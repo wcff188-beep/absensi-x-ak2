@@ -40,3 +40,4 @@ document.getElementById('absensiForm').addEventListener('submit', function(e) {
     
     xhr.send(formData);
 });
+
