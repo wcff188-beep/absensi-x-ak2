@@ -15,30 +15,50 @@
         }
 
         body {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('206705_2.png');
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('206705_2.png');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
             background-repeat: no-repeat;
-            padding-bottom: 90px; 
+            padding-bottom: 90px;
+            animation: fadeInBody 0.6s ease-in-out;
+        }
+
+        @keyframes fadeInBody {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         .top-bg {
-            background: linear-gradient(135deg, #c62828 0%, #b71c1c 100%);
+            background: linear-gradient(135deg, #d32f2f 0%, #b71c1c 100%);
             color: white;
             text-align: center;
-            padding: 45px 20px 85px 20px;
-            border-bottom-left-radius: 35px; 
-            border-bottom-right-radius: 35px; 
-            box-shadow: 0 10px 25px rgba(198, 40, 40, 0.3);
+            padding: 50px 20px 90px 20px;
+            border-bottom-left-radius: 40px; 
+            border-bottom-right-radius: 40px; 
+            box-shadow: 0 10px 30px rgba(183, 28, 28, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Efek kilau cahaya abstrak di latar header */
+        .top-bg::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+            pointer-events: none;
         }
 
         .top-bg h1 {
-            font-size: 26px;
+            font-size: 28px;
             font-weight: 800;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.8px;
             margin-bottom: 6px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.15);
+            text-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
 
         .top-bg p {
@@ -48,41 +68,52 @@
         }
 
         .card-container {
-            background: rgba(255, 255, 255, 0.88);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            margin: -50px 20px 20px 20px; 
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            margin: -55px 20px 20px 20px; 
             padding: 30px 22px;
-            border-radius: 24px;
-            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+            border-radius: 28px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
             position: relative;
             z-index: 10;
-            border: 1px solid rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.8);
             text-align: center;
+            animation: slideUp 0.5s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .card-header {
-            font-size: 19px;
+            font-size: 18px;
             font-weight: 800;
-            color: #c62828; 
+            color: #b71c1c; 
             margin-bottom: 22px;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
-            border-bottom: 2px solid rgba(198, 40, 40, 0.1);
-            padding-bottom: 12px;
+            border-bottom: 2px dashed rgba(183, 28, 28, 0.15);
+            padding-bottom: 14px;
         }
 
         .qris-box {
-            background: white;
-            padding: 16px;
-            border-radius: 18px;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+            background: #ffffff;
+            padding: 18px;
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
             display: inline-block;
-            margin-bottom: 20px;
+            margin-bottom: 22px;
             max-width: 100%;
-            border: 1px solid rgba(0,0,0,0.04);
+            border: 2px solid #f1f3f5;
+            transition: transform 0.3s ease;
+        }
+
+        .qris-box:hover {
+            transform: scale(1.02);
         }
 
         .qris-box img {
@@ -92,31 +123,49 @@
             border-radius: 12px;
         }
 
+        .info-badge {
+            background: #fff3cd;
+            color: #856404;
+            padding: 10px 14px;
+            border-radius: 12px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            border: 1px solid #ffeeba;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
         .info-text {
             font-size: 14px;
-            color: #444;
+            color: #495057;
             line-height: 1.6;
             margin-bottom: 22px;
             font-weight: 500;
         }
 
         .wa-btn {
-            display: inline-block;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
             width: 100%;
             padding: 16px;
-            background: linear-gradient(135deg, #25d366 0%, #1ebe5d 100%);
+            background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
             color: white;
             text-decoration: none;
-            border-radius: 14px;
+            border-radius: 16px;
             font-size: 16px;
             font-weight: 700;
-            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.35);
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
             transition: all 0.3s ease;
         }
 
         .wa-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.45);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(37, 211, 102, 0.5);
         }
 
         .wa-btn:active {
@@ -129,11 +178,11 @@
             left: 0;
             width: 100%;
             background-color: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(12px);
             display: flex;
             justify-content: space-around;
             padding: 10px 0 14px 0;
-            box-shadow: 0 -4px 20px rgba(0,0,0,0.08);
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
             z-index: 100;
             border-top: 1px solid rgba(0,0,0,0.05);
         }
@@ -156,7 +205,7 @@
 
         .nav-item.active .nav-icon {
             opacity: 1;
-            transform: scale(1.1);
+            transform: scale(1.15);
         }
 
         .nav-icon {
@@ -174,7 +223,7 @@
 
     <div class="card-container">
         <div class="card-header">
-            💰 <span>Scan QRIS Kas</span>
+            💳 <span>QRIS Pembayaran Kas</span>
         </div>
         
         <div class="qris-box">
@@ -182,14 +231,18 @@
             <img src="210103-clean.png" alt="QRIS Kas Digital X AK 2">
         </div>
 
+        <div class="info-badge">
+            ⚡ Scan menggunakan DANA, GoPay, OVO, atau m-Banking
+        </div>
+
         <div class="info-text">
-            Sudah membayar kas? Silakan kirimkan bukti transaksi kamu melalui tombol di bawah ini:
+            Sudah selesai membayar kas? Jangan lupa klik tombol di bawah untuk mengirimkan bukti pembayarannya ke bendahara ya!
         </div>
 
         <!-- Tombol Kirim Bukti Transaksi ke WhatsApp dengan Teks Otomatis -->
         <a href="https://wa.me/6285282331327?text=Assalamualaikum,%20saya%20ingin%20mengirimkan%20bukti%20pembayaran%20Kas%20Digital.%0A%0A-%20Nama%20Lengkap:%20%0A-%20Nomor%20Absen:%20%0A-%20Bulan%20Kas:%20%0A-%20Nominal:%20Rp%20%0A%0A(Lampirkan%20screenshot%20bukti%20transfer%20di%20bawah%20pesan%20ini)" 
            class="wa-btn" target="_blank">
-            📱 Kirim Bukti Transaksi
+            <span>📱</span> Kirim Bukti Transaksi
         </a>
     </div>
 
