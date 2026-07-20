@@ -239,7 +239,7 @@
 
             <div class="form-group">
                 <label for="no_absen">Nomor Absen</label>
-                <input type="number" id="no_absen" name="no_absen" placeholder="Terisi otomatis..." readonly required>
+                <input type="number" id="no_absen" name="no_absen" min="1" max="35" placeholder="Terisi otomatis..." readonly required>
             </div>
 
             <div class="form-group">
@@ -260,10 +260,13 @@
     </div>
 
     <div class="bottom-nav">
-        <!-- Menggunakan ./ agar navigasi lebih stabil di HP -->
         <a href="./index.html" class="nav-item active">
             <span class="nav-icon">📝</span>
             <span class="nav-text">Absen</span>
+        </a>
+        <a href="./kas.html" class="nav-item">
+            <span class="nav-icon">💰</span>
+            <span class="nav-text">Kas Digital</span>
         </a>
         <a href="./admin.html" class="nav-item">
             <span class="nav-icon">⚙️</span>
