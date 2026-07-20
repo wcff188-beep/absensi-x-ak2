@@ -6,11 +6,19 @@ function getDeviceType() {
     return "Desktop";
 }
 
-// Otomatis mengisi nomor absen berdasarkan nama yang dipilih di dropdown
-document.getElementById('nama').addEventListener('change', function() {
-    const selectedOption = this.options[this.selectedIndex];
-    const absenValue = selectedOption.getAttribute('data-absen');
-    document.getElementById('no_absen').value = absenValue || '';
+// Otomatis mengisi nomor absen berdasarkan nama yang dipilih di dropdown (Custom Dropdown)
+document.querySelectorAll('.custom-option').forEach(option => {
+    option.addEventListener('click', function() {
+        const value = this.getAttribute('data-value');
+        const absen = this.getAttribute('data-absen');
+        
+        document.getElementById('selectedText').textContent = this.textContent;
+        document.getElementById('selectedText').style.color = '#0f172a';
+        document.getElementById('nama').value = value;
+        document.getElementById('no_absen').value = absen;
+        
+        document.getElementById('dropdownList').classList.remove('open');
+    });
 });
 
 document.getElementById('absensiForm').addEventListener('submit', async function(e) {
@@ -24,21 +32,11 @@ document.getElementById('absensiForm').addEventListener('submit', async function
     const formData = new FormData(form);
     const no_absen = formData.get('no_absen');
     
-    // Validasi Nomor Absen (Pastikan terisi dan di antara 1-36)
-    if(!no_absen || no_absen < 1 || no_absen > 36) {
-        showNotif('Nomor absen harus antara 1 sampai 36.', 'error');
+    // Validasi Nomor Absen (Pastikan terisi dan di antara 1-35)
+    if(!no_absen || no_absen < 1 || no_absen > 35) {
+        showNotif('Nomor absen harus antara 1 sampai 35.', 'error');
         return;
     }
-
-    // --- LOGIKA CEK ABSEN 1 KALI SEHARI ---
-    const today = new Date().toISOString().split('T')[0]; // Format: YYYY-MM-DD
-    const absenKey = `absen_${today}_${no_absen}`;
-
-    if (localStorage.getItem(absenKey)) {
-        showNotif(`Nomor absen ${no_absen} sudah melakukan absensi hari ini!`, 'error');
-        return;
-    }
-    // -------------------------------------
 
     // Tambahkan info perangkat ke dalam formData agar ikut terkirim
     formData.append('perangkat', getDeviceType());
@@ -55,17 +53,15 @@ document.getElementById('absensiForm').addEventListener('submit', async function
             body: formData
         });
 
-        // Karena GAS me-return ContentService.createTextOutput("Success"),
-        // kita harus menangkapnya sebagai text(), bukan json()
+        // Menangkap response text dari Google Apps Script
         const resultText = await response.text();
 
         if (resultText.trim() === 'Success') {
-            // Simpan tanda bahwa nomor absen ini sudah berhasil absen hari ini
-            localStorage.setItem(absenKey, 'true');
-            
             showNotif('Data absen berhasil terkirim!', 'success');
             form.reset();
-            // Reset juga nilai nomor absen karena form.reset() kadang melewatkan input readonly
+            // Reset juga nilai kustom dropdown dan nomor absen
+            document.getElementById('selectedText').textContent = '-- Pilih Nama Anda --';
+            document.getElementById('selectedText').style.color = '#94a3b8';
             document.getElementById('no_absen').value = '';
         } else {
             showNotif('Gagal mengirim data. Coba lagi.', 'error');
@@ -75,7 +71,7 @@ document.getElementById('absensiForm').addEventListener('submit', async function
         console.error(error);
     } finally {
         btn.disabled = false;
-        btn.textContent = "Kirim Absensi";
+        btn.textContent = "Kirim Kehadiran";
     }
 });
 
