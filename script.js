@@ -74,4 +74,4 @@ function showNotif(message, type) {
     const notif = document.getElementById('notification');
     notif.textContent = message;
     notif.className = `notification ${type}`;
-
+}
