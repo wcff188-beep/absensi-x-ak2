@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Absensi X AK 2 - SMK Negeri 12 Jakarta</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
     <style>
         * {
@@ -15,120 +15,146 @@
         }
 
         body {
-            background-image: url('206705_2.png');
+            background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('206705_2.png');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
             background-repeat: no-repeat;
-            padding-bottom: 80px; 
+            padding-bottom: 90px; 
         }
 
         .top-bg {
-            background-color: rgba(198, 40, 40, 0.85); 
+            background: linear-gradient(135deg, #c62828 0%, #b71c1c 100%);
             color: white;
             text-align: center;
-            padding: 40px 20px 90px 20px;
-            border-bottom-left-radius: 40px; 
-            border-bottom-right-radius: 40px; 
+            padding: 45px 20px 85px 20px;
+            border-bottom-left-radius: 35px; 
+            border-bottom-right-radius: 35px; 
+            box-shadow: 0 10px 25px rgba(198, 40, 40, 0.3);
         }
 
         .top-bg h1 {
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 5px;
+            font-size: 26px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.15);
         }
 
         .top-bg p {
             font-size: 14px;
-            opacity: 0.9;
+            opacity: 0.95;
+            font-weight: 500;
         }
 
         .card-container {
-            background: rgba(255, 255, 255, 0.75);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            margin: -60px 20px 20px 20px; 
-            padding: 25px 20px;
-            border-radius: 20px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            margin: -50px 20px 20px 20px; 
+            padding: 30px 22px;
+            border-radius: 24px;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
             position: relative;
             z-index: 10;
-            border: 1px solid rgba(255, 255, 255, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.6);
         }
 
         .card-header {
-            font-size: 18px;
-            font-weight: 700;
+            font-size: 19px;
+            font-weight: 800;
             color: #c62828; 
             margin-bottom: 25px;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
+            border-bottom: 2px solid rgba(198, 40, 40, 0.1);
+            padding-bottom: 12px;
         }
 
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 22px;
         }
 
         .form-group label {
             display: block;
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 700;
-            color: #444;
+            color: #333;
             margin-bottom: 8px;
+            letter-spacing: 0.2px;
         }
 
         .form-group input, .form-group select {
             width: 100%;
-            padding: 14px 16px;
-            border: 1px solid rgba(0, 0, 0, 0.1);
-            border-radius: 12px;
+            padding: 15px 16px;
+            border: 1.5px solid #e0e0e0;
+            border-radius: 14px;
             font-size: 15px;
             outline: none;
-            transition: border-color 0.3s;
-            background-color: rgba(255, 255, 255, 0.9);
+            transition: all 0.3s ease;
+            background-color: rgba(255, 255, 255, 0.95);
             color: #333;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
         }
 
         .form-group input:focus, .form-group select:focus {
             border-color: #c62828; 
+            background-color: #ffffff;
+            box-shadow: 0 0 0 4px rgba(198, 40, 40, 0.12), inset 0 2px 4px rgba(0,0,0,0.02);
         }
 
         .form-group input[readonly] {
-            background-color: rgba(240, 240, 240, 0.9);
-            color: #666;
+            background-color: #f1f3f5;
+            color: #6c757d;
+            border-color: #e9ecef;
             cursor: not-allowed;
         }
 
         button {
             width: 100%;
             padding: 16px;
-            background-color: #d32f2f; 
+            background: linear-gradient(135deg, #d32f2f 0%, #c62828 100%);
             color: white;
             border: none;
-            border-radius: 12px;
+            border-radius: 14px;
             font-size: 16px;
             font-weight: 700;
             cursor: pointer;
-            margin-top: 5px;
-            transition: background 0.3s;
+            margin-top: 8px;
+            box-shadow: 0 6px 20px rgba(211, 47, 47, 0.35);
+            transition: all 0.3s ease;
         }
 
         button:hover {
-            background-color: #b71c1c; 
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(211, 47, 47, 0.45);
+        }
+
+        button:active {
+            transform: translateY(0);
         }
 
         button:disabled {
-            background-color: #ffcdd2; 
+            background: #ffcdd2;
+            box-shadow: none;
+            cursor: not-allowed;
+            transform: none;
         }
 
         .notification {
-            margin-top: 15px;
-            padding: 12px;
-            border-radius: 10px;
+            margin-top: 18px;
+            padding: 14px;
+            border-radius: 12px;
             text-align: center;
             font-size: 14px;
             font-weight: 600;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .notification.hidden {
@@ -136,13 +162,15 @@
         }
 
         .notification.success {
-            background-color: #e1f5fe;
-            color: #0277bd;
+            background-color: #e3f2fd;
+            color: #0d47a1;
+            border: 1px solid #bbdefb;
         }
 
         .notification.error {
             background-color: #ffebee;
-            color: #c62828; 
+            color: #b71c1c; 
+            border: 1px solid #ffcdd2;
         }
 
         .bottom-nav {
@@ -150,12 +178,14 @@
             bottom: 0;
             left: 0;
             width: 100%;
-            background-color: #ffffff;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
             display: flex;
             justify-content: space-around;
-            padding: 12px 0 15px 0;
-            box-shadow: 0 -4px 10px rgba(0,0,0,0.03);
+            padding: 10px 0 14px 0;
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.08);
             z-index: 100;
+            border-top: 1px solid rgba(0,0,0,0.05);
         }
 
         .nav-item {
@@ -163,23 +193,26 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            color: #9e9e9e; 
-            font-size: 13px;
+            color: #adb5bd; 
+            font-size: 12px;
             font-weight: 600;
-            gap: 5px;
+            gap: 4px;
+            transition: color 0.3s ease;
         }
 
-        .nav-item.active {
+.nav-item.active {
             color: #c62828; 
         }
 
         .nav-item.active .nav-icon {
             opacity: 1;
+            transform: scale(1.1);
         }
 
         .nav-icon {
             font-size: 22px;
             opacity: 0.7;
+            transition: transform 0.3s ease;
         }
     </style>
 </head>
@@ -229,17 +262,16 @@
                     <option value="RUTH MEIQUILLA SYAH" data-absen="28">28. RUTH MEIQUILLA SYAH</option>
                     <option value="SAFA LAILA RAMADHANI" data-absen="29">29. SAFA LAILA RAMADHANI</option>
                     <option value="SHAFA RIZKI ALLIYAH" data-absen="30">30. SHAFA RIZKI ALLIYAH</option>
-                    <option value="SILVIANI PUTRI" data-absen="31">31. SILVIANI PUTRI</option>
-                    <option value="SYIFA AZZAHRAH DAHLIA" data-absen="32">32. SYIFA AZZAHRAH DAHLIA</option>
-                    <option value="TSARAUNA AFIFA SHOLEHA" data-absen="33">33. TSARAUNA AFIFA SHOLEHA</option>
-                    <option value="ZALFA NAURA RIYANTI" data-absen="34">34. ZALFA NAURA RIYANTI</option>
-                    <option value="ZUL NAILA ASSYIFA" data-absen="35">35. ZUL NAILA ASSYIFA</option>
+                    <option value="SYIFA AZZAHRAH DAHLIA" data-absen="31">31. SYIFA AZZAHRAH DAHLIA</option>
+                    <option value="TSARAUNA AFIFA SHOLEHA" data-absen="32">32. TSARAUNA AFIFA SHOLEHA</option>
+                    <option value="ZALFA NAURA RIYANTI" data-absen="33">33. ZALFA NAURA RIYANTI</option>
+                    <option value="ZUL NAILA ASSYIFA" data-absen="34">34. ZUL NAILA ASSYIFA</option>
                 </select>
             </div>
 
             <div class="form-group">
                 <label for="no_absen">Nomor Absen</label>
-                <input type="number" id="no_absen" name="no_absen" min="1" max="35" placeholder="Terisi otomatis..." readonly required>
+                <input type="number" id="no_absen" name="no_absen" min="1" max="34" placeholder="Terisi otomatis..." readonly required>
             </div>
 
             <div class="form-group">
