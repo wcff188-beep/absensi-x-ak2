@@ -17,14 +17,24 @@ document.getElementById('absensiForm').addEventListener('submit', async function
     const formData = new FormData(form);
     const no_absen = formData.get('no_absen');
     
-    // Tambahkan info perangkat ke dalam formData agar ikut terkirim
-    formData.append('perangkat', getDeviceType());
-
     // Validasi Nomor Absen
     if(no_absen < 1 || no_absen > 36) {
         showNotif('Nomor absen harus antara 1 sampai 36.', 'error');
         return;
     }
+
+    // --- LOGIKA CEK ABSEN 1 KALI SEHARI ---
+    const today = new Date().toISOString().split('T')[0]; // Format: YYYY-MM-DD
+    const absenKey = `absen_${today}_${no_absen}`;
+
+    if (localStorage.getItem(absenKey)) {
+        showNotif(`Nomor absen ${no_absen} sudah melakukan absensi hari ini!`, 'error');
+        return;
+    }
+    // -------------------------------------
+
+    // Tambahkan info perangkat ke dalam formData agar ikut terkirim
+    formData.append('perangkat', getDeviceType());
 
     // Ubah UI menjadi loading
     btn.disabled = true;
@@ -42,7 +52,10 @@ document.getElementById('absensiForm').addEventListener('submit', async function
         // kita harus menangkapnya sebagai text(), bukan json()
         const resultText = await response.text();
 
-        if (resultText === 'Success') {
+        if (resultText.trim() === 'Success') {
+            // Simpan tanda bahwa nomor absen ini sudah berhasil absen hari ini
+            localStorage.setItem(absenKey, 'true');
+            
             showNotif('Data absen berhasil terkirim!', 'success');
             form.reset();
         } else {
