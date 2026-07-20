@@ -113,6 +113,7 @@
 
         .form-group {
             margin-bottom: 20px;
+            position: relative;
         }
 
         .form-group label {
@@ -124,7 +125,74 @@
             letter-spacing: 0.2px;
         }
 
-        /* Styling Kotak Input & Select agar Lebih Elegan dan Modern */
+        /* Custom Dropdown Styling */
+        .custom-select-box {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 14px;
+            font-size: 14px;
+            background-color: #ffffff;
+            color: #0f172a;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.25s ease;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.01);
+            user-select: none;
+        }
+
+        .custom-select-box:hover {
+            border-color: #94a3b8;
+        }
+
+        .custom-dropdown-list {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            max-height: 250px;
+            overflow-y: auto;
+            background: #ffffff;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 14px;
+            margin-top: 6px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            z-index: 1000;
+            display: none;
+        }
+
+        .custom-dropdown-list.open {
+            display: block;
+            animation: fadeInList 0.2s ease;
+        }
+
+        @keyframes fadeInList {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .custom-option {
+            padding: 12px 16px;
+            font-size: 14px;
+            color: #1e293b;
+            cursor: pointer;
+            border-bottom: 1px solid #f1f5f9;
+            transition: background 0.15s ease;
+        }
+
+        .custom-option:hover {
+            background-color: #fef2f2;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .custom-option:last-child {
+            border-bottom: none;
+        }
+
+        /* Standard Input & Select for Status */
         .form-group input, .form-group select {
             width: 100%;
             padding: 14px 16px;
@@ -136,9 +204,11 @@
             background-color: #ffffff;
             color: #0f172a;
             box-shadow: inset 0 2px 4px rgba(0,0,0,0.01);
+        }
+
+        .form-group select {
             appearance: none;
             -webkit-appearance: none;
-            -moz-appearance: none;
             background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
             background-repeat: no-repeat;
             background-position: right 14px center;
@@ -156,15 +226,6 @@
             color: #64748b;
             border-color: #e2e8f0;
             cursor: not-allowed;
-            background-image: none;
-        }
-
-        /* Menata Tampilan Pilihan di dalam dropdown agar bersih */
-        select option {
-            padding: 12px;
-            background-color: #ffffff;
-            color: #1e293b;
-            font-size: 14px;
         }
 
         /* Tombol Enterprise Style */
@@ -292,45 +353,52 @@
             </div>
             
             <form id="absensiForm">
+                <!-- Custom Dropdown untuk Nama -->
                 <div class="form-group">
-                    <label for="nama">Pilih Nama Lengkap</label>
-                    <select id="nama" name="nama" required>
-                        <option value="" disabled selected>-- Pilih Nama Anda --</option>
-                        <option value="A'ISY PUTRI RAHAYU" data-absen="1">1. A'ISY PUTRI RAHAYU</option>
-                        <option value="ANGEL SILVIANA" data-absen="2">2. ANGEL SILVIANA</option>
-                        <option value="ANGGITA PUTRI AULIA PANGGABEAN" data-absen="3">3. ANGGITA PUTRI AULIA PANGGABEAN</option>
-                        <option value="ARNHILDA VIVIA DANASTRI" data-absen="4">4. ARNHILDA VIVIA DANASTRI</option>
-                        <option value="AUREL ZAHRA SUTAWIJAYA" data-absen="5">5. AUREL ZAHRA SUTAWIJAYA</option>
-                        <option value="AZZAHRA APRILIYANI" data-absen="6">6. AZZAHRA APRILIYANI</option>
-                        <option value="CAHYA HALIMATUL AULIA" data-absen="7">7. CAHYA HALIMATUL AULIA</option>
-                        <option value="DALILATI BATRISYIA SAJIDAH" data-absen="8">8. DALILATI BATRISYIA SAJIDAH</option>
-                        <option value="DEVI SEFTIANA FITRI" data-absen="9">9. DEVI SEFTIANA FITRI</option>
-                        <option value="FARAH HASANAH PUTRI" data-absen="10">10. FARAH HASANAH PUTRI</option>
-                        <option value="GEISHAVINKA NAMIRA MALENGGA" data-absen="11">11. GEISHAVINKA NAMIRA MALENGGA</option>
-                        <option value="HAERANI NUR KAMILA" data-absen="12">12. HAERANI NUR KAMILA</option>
-                        <option value="HAMIDAH" data-absen="13">13. HAMIDAH</option>
-                        <option value="KEISHA NABILAH SAKHI" data-absen="14">14. KEISHA NABILAH SAKHI</option>
-                        <option value="KEISHA RAMADANTI EL CHAIRY" data-absen="15">15. KEISHA RAMADANTI EL CHAIRY</option>
-                        <option value="LUSIANAH JUNITA PUTRI" data-absen="16">16. LUSIANAH JUNITA PUTRI</option>
-                        <option value="MUTIARA LEDENSKI PANGARIBUAN" data-absen="17">17. MUTIARA LEDENSKI PANGARIBUAN</option>
-                        <option value="NABILLA NOER RAMADHANI" data-absen="18">18. NABILLA NOER RAMADHANI</option>
-                        <option value="NADIV YAQZAN RAY" data-absen="19">19. NADIV YAQZAN RAY</option>
-                        <option value="NATASYA AULIA PUTRI" data-absen="20">20. NATASYA AULIA PUTRI</option>
-                        <option value="PIKA APRIANTI" data-absen="21">21. PIKA APRIANTI</option>
-                        <option value="PUTRI AYU NABILA" data-absen="22">22. PUTRI AYU NABILA</option>
-                        <option value="PUTRI FETO ZAHIRAH" data-absen="23">23. PUTRI FETO ZAHIRAH</option>
-                        <option value="PUTRI REGINA" data-absen="24">24. PUTRI REGINA</option>
-                        <option value="RAFFINZA KHAIRISMA DESWIRA" data-absen="25">25. RAFFINZA KHAIRISMA DESWIRA</option>
-                        <option value="RAHMAT APRILLA SAMSONG" data-absen="26">26. RAHMAT APRILLA SAMSONG</option>
-                        <option value="ROIS HANIF ALFIROS" data-absen="27">27. ROIS HANIF ALFIROS</option>
-                        <option value="RUTH MEIQUILLA SYAH" data-absen="28">28. RUTH MEIQUILLA SYAH</option>
-                        <option value="SAFA LAILA RAMADHANI" data-absen="29">29. SAFA LAILA RAMADHANI</option>
-                        <option value="SHAFA RIZKI ALLIYAH" data-absen="30">30. SHAFA RIZKI ALLIYAH</option>
-                        <option value="SYIFA AZZAHRAH DAHLIA" data-absen="31">31. SYIFA AZZAHRAH DAHLIA</option>
-                        <option value="TSARAUNA AFIFA SHOLEHA" data-absen="32">32. TSARAUNA AFIFA SHOLEHA</option>
-                        <option value="ZALFA NAURA RIYANTI" data-absen="33">33. ZALFA NAURA RIYANTI</option>
-                        <option value="ZUL NAILA ASSYIFA" data-absen="34">34. ZUL NAILA ASSYIFA</option>
-                    </select>
+                    <label>Pilih Nama Lengkap</label>
+                    <div class="custom-select-box" id="selectBox">
+                        <span id="selectedText">-- Pilih Nama Anda --</span>
+                        <span>▼</span>
+                    </div>
+                    <!-- Input tersembunyi untuk menyimpan nilai yang dikirim ke form -->
+                    <input type="hidden" id="nama" name="nama" required>
+                    
+                    <div class="custom-dropdown-list" id="dropdownList">
+                        <div class="custom-option" data-value="A'ISY PUTRI RAHAYU" data-absen="1">1. A'ISY PUTRI RAHAYU</div>
+                        <div class="custom-option" data-value="ANGEL SILVIANA" data-absen="2">2. ANGEL SILVIANA</div>
+                        <div class="custom-option" data-value="ANGGITA PUTRI AULIA PANGGABEAN" data-absen="3">3. ANGGITA PUTRI AULIA PANGGABEAN</div>
+                        <div class="custom-option" data-value="ARNHILDA VIVIA DANASTRI" data-absen="4">4. ARNHILDA VIVIA DANASTRI</div>
+                        <div class="custom-option" data-value="AUREL ZAHRA SUTAWIJAYA" data-absen="5">5. AUREL ZAHRA SUTAWIJAYA</div>
+                        <div class="custom-option" data-value="AZZAHRA APRILIYANI" data-absen="6">6. AZZAHRA APRILIYANI</div>
+                        <div class="custom-option" data-value="CAHYA HALIMATUL AULIA" data-absen="7">7. CAHYA HALIMATUL AULIA</div>
+                        <div class="custom-option" data-value="DALILATI BATRISYIA SAJIDAH" data-absen="8">8. DALILATI BATRISYIA SAJIDAH</div>
+                        <div class="custom-option" data-value="DEVI SEFTIANA FITRI" data-absen="9">9. DEVI SEFTIANA FITRI</div>
+                        <div class="custom-option" data-value="FARAH HASANAH PUTRI" data-absen="10">10. FARAH HASANAH PUTRI</div>
+                        <div class="custom-option" data-value="GEISHAVINKA NAMIRA MALENGGA" data-absen="11">11. GEISHAVINKA NAMIRA MALENGGA</div>
+                        <div class="custom-option" data-value="HAERANI NUR KAMILA" data-absen="12">12. HAERANI NUR KAMILA</div>
+                        <div class="custom-option" data-value="HAMIDAH" data-absen="13">13. HAMIDAH</div>
+                        <div class="custom-option" data-value="KEISHA NABILAH SAKHI" data-absen="14">14. KEISHA NABILAH SAKHI</div>
+                        <div class="custom-option" data-value="KEISHA RAMADANTI EL CHAIRY" data-absen="15">15. KEISHA RAMADANTI EL CHAIRY</div>
+                        <div class="custom-option" data-value="LUSIANAH JUNITA PUTRI" data-absen="16">16. LUSIANAH JUNITA PUTRI</div>
+                        <div class="custom-option" data-value="MUTIARA LEDENSKI PANGARIBUAN" data-absen="17">17. MUTIARA LEDENSKI PANGARIBUAN</div>
+                        <div class="custom-option" data-value="NABILLA NOER RAMADHANI" data-absen="18">18. NABILLA NOER RAMADHANI</div>
+                        <div class="custom-option" data-value="NADIV YAQZAN RAY" data-absen="19">19. NADIV YAQZAN RAY</div>
+                        <div class="custom-option" data-value="NATASYA AULIA PUTRI" data-absen="20">20. NATASYA AULIA PUTRI</div>
+                        <div class="custom-option" data-value="PIKA APRIANTI" data-absen="21">21. PIKA APRIANTI</div>
+                        <div class="custom-option" data-value="PUTRI AYU NABILA" data-absen="22">22. PUTRI AYU NABILA</div>
+                        <div class="custom-option" data-value="PUTRI FETO ZAHIRAH" data-absen="23">23. PUTRI FETO ZAHIRAH</div>
+                        <div class="custom-option" data-value="PUTRI REGINA" data-absen="24">24. PUTRI REGINA</div>
+                        <div class="custom-option" data-value="RAFFINZA KHAIRISMA DESWIRA" data-absen="25">25. RAFFINZA KHAIRISMA DESWIRA</div>
+                        <div class="custom-option" data-value="RAHMAT APRILLA SAMSONG" data-absen="26">26. RAHMAT APRILLA SAMSONG</div>
+                        <div class="custom-option" data-value="ROIS HANIF ALFIROS" data-absen="27">27. ROIS HANIF ALFIROS</div>
+                        <div class="custom-option" data-value="RUTH MEIQUILLA SYAH" data-absen="28">28. RUTH MEIQUILLA SYAH</div>
+                        <div class="custom-option" data-value="SAFA LAILA RAMADHANI" data-absen="29">29. SAFA LAILA RAMADHANI</div>
+                        <div class="custom-option" data-value="SHAFA RIZKI ALLIYAH" data-absen="30">30. SHAFA RIZKI ALLIYAH</div>
+                        <div class="custom-option" data-value="SYIFA AZZAHRAH DAHLIA" data-absen="31">31. SYIFA AZZAHRAH DAHLIA</div>
+                        <div class="custom-option" data-value="TSARAUNA AFIFA SHOLEHA" data-absen="32">32. TSARAUNA AFIFA SHOLEHA</div>
+                        <div class="custom-option" data-value="ZALFA NAURA RIYANTI" data-absen="33">33. ZALFA NAURA RIYANTI</div>
+                        <div class="custom-option" data-value="ZUL NAILA ASSYIFA" data-absen="34">34. ZUL NAILA ASSYIFA</div>
+                    </div>
                 </div>
 
                 <div class="form-group">
@@ -373,6 +441,40 @@
     </div>
 
     <script src="config.js"></script>
+    <script>
+        // Skrip Interaktif untuk Custom Dropdown & Pengisian Otomatis Nomor Absen
+        const selectBox = document.getElementById('selectBox');
+        const dropdownList = document.getElementById('dropdownList');
+        const selectedText = document.getElementById('selectedText');
+        const hiddenInput = document.getElementById('nama');
+        const noAbsenInput = document.getElementById('no_absen');
+
+        // Buka/Tutup dropdown saat kotak diklik
+        selectBox.addEventListener('click', function(e) {
+            e.stopPropagation();
+            dropdownList.classList.toggle('open');
+        });
+
+        // Pilih opsi dari daftar kustom
+        document.querySelectorAll('.custom-option').forEach(option => {
+            option.addEventListener('click', function() {
+                const value = this.getAttribute('data-value');
+                const absen = this.getAttribute('data-absen');
+                
+                selectedText.textContent = this.textContent;
+                selectedText.style.color = '#0f172a';
+                hiddenInput.value = value;
+                noAbsenInput.value = absen;
+                
+                dropdownList.classList.remove('open');
+            });
+        });
+
+        // Tutup dropdown jika area luar diklik
+        document.addEventListener('click', function() {
+            dropdownList.classList.remove('open');
+        });
+    </script>
     <script src="script.js"></script>
 </body>
 </html>
