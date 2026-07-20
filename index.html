@@ -4,139 +4,179 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Absensi X AK 2 - SMK Negeri 12 Jakarta</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
     <style>
+        :root {
+            --primary: #dc2626;
+            --primary-dark: #b91c1c;
+            --bg-glass: rgba(255, 255, 255, 0.95);
+            --shadow-subtle: 0 10px 30px -5px rgba(0, 0, 0, 0.08);
+            --shadow-card: 0 20px 40px -10px rgba(0, 0, 0, 0.15);
+        }
+
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Inter', sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
         }
 
         body {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('206705_2.png');
+            background-image: linear-gradient(135deg, rgba(15, 23, 42, 0.75), rgba(30, 41, 59, 0.75)), url('206705_2.png');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
             background-repeat: no-repeat;
-            padding-bottom: 90px; 
+            min-height: 100vh;
+            padding-bottom: 100px;
+            color: #1e293b;
         }
 
-        .top-bg {
-            background: linear-gradient(135deg, #c62828 0%, #b71c1c 100%);
+        /* Header Dashboard */
+        .app-header {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
             color: white;
+            padding: 40px 20px 85px 20px;
+            border-bottom-left-radius: 36px;
+            border-bottom-right-radius: 36px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+            position: relative;
+            overflow: hidden;
             text-align: center;
-            padding: 45px 20px 85px 20px;
-            border-bottom-left-radius: 35px; 
-            border-bottom-right-radius: 35px; 
-            box-shadow: 0 10px 25px rgba(198, 40, 40, 0.3);
         }
 
-        .top-bg h1 {
-            font-size: 26px;
-            font-weight: 800;
+        .header-content {
+            max-width: 480px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .badge-org {
+            display: inline-block;
+            background: rgba(220, 38, 38, 0.2);
+            color: #fca5a5;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
             letter-spacing: 0.5px;
-            margin-bottom: 6px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.15);
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            border: 1px solid rgba(220, 38, 38, 0.3);
         }
 
-        .top-bg p {
-            font-size: 14px;
-            opacity: 0.95;
+        .app-header h1 {
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin-bottom: 4px;
+        }
+
+        .app-header p {
+            font-size: 13px;
+            color: #94a3b8;
             font-weight: 500;
         }
 
-        .card-container {
-            background: rgba(255, 255, 255, 0.88);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            margin: -50px 20px 20px 20px; 
-            padding: 30px 22px;
-            border-radius: 24px;
-            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+        /* Container Utama */
+        .main-container {
+            max-width: 480px;
+            margin: -50px auto 0 auto;
+            padding: 0 20px;
             position: relative;
             z-index: 10;
-            border: 1px solid rgba(255, 255, 255, 0.6);
         }
 
-        .card-header {
-            font-size: 19px;
-            font-weight: 800;
-            color: #c62828; 
-            margin-bottom: 25px;
+        .card {
+            background: var(--bg-glass);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            padding: 28px 24px;
+            border-radius: 24px;
+            box-shadow: var(--shadow-card);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+        }
+
+        .card-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 22px;
             display: flex;
             align-items: center;
-            gap: 10px;
-            border-bottom: 2px solid rgba(198, 40, 40, 0.1);
+            gap: 8px;
+            border-bottom: 2px dashed rgba(220, 38, 38, 0.15);
             padding-bottom: 12px;
         }
 
         .form-group {
-            margin-bottom: 22px;
+            margin-bottom: 20px;
         }
 
         .form-group label {
             display: block;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 700;
-            color: #333;
+            color: #334155;
             margin-bottom: 8px;
             letter-spacing: 0.2px;
         }
 
         .form-group input, .form-group select {
             width: 100%;
-            padding: 15px 16px;
-            border: 1.5px solid #e0e0e0;
+            padding: 14px 16px;
+            border: 1.5px solid #cbd5e1;
             border-radius: 14px;
-            font-size: 15px;
+            font-size: 14px;
             outline: none;
-            transition: all 0.3s ease;
-            background-color: rgba(255, 255, 255, 0.95);
-            color: #333;
-            box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+            transition: all 0.25s ease;
+            background-color: #ffffff;
+            color: #0f172a;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.01);
         }
 
         .form-group input:focus, .form-group select:focus {
-            border-color: #c62828; 
-            background-color: #ffffff;
-            box-shadow: 0 0 0 4px rgba(198, 40, 40, 0.12), inset 0 2px 4px rgba(0,0,0,0.02);
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(220, 38, 38, 0.12), inset 0 2px 4px rgba(0,0,0,0.01);
         }
 
         .form-group input[readonly] {
-            background-color: #f1f3f5;
-            color: #6c757d;
-            border-color: #e9ecef;
+            background-color: #f1f5f9;
+            color: #64748b;
+            border-color: #e2e8f0;
             cursor: not-allowed;
         }
 
-        button {
+        /* Tombol Enterprise Style */
+        .btn-enterprise {
             width: 100%;
-            padding: 16px;
-            background: linear-gradient(135deg, #d32f2f 0%, #c62828 100%);
+            padding: 15px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             color: white;
             border: none;
             border-radius: 14px;
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 700;
             cursor: pointer;
-            margin-top: 8px;
-            box-shadow: 0 6px 20px rgba(211, 47, 47, 0.35);
-            transition: all 0.3s ease;
+            margin-top: 6px;
+            box-shadow: 0 8px 20px -4px rgba(220, 38, 38, 0.4);
+            transition: all 0.25s ease;
         }
 
-        button:hover {
+        .btn-enterprise:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(211, 47, 47, 0.45);
+            box-shadow: 0 12px 25px -4px rgba(220, 38, 38, 0.5);
+            background: linear-gradient(135deg, #ef4444 0%, var(--primary) 100%);
         }
 
-        button:active {
+        .btn-enterprise:active {
             transform: translateY(0);
         }
 
-        button:disabled {
-            background: #ffcdd2;
+        .btn-enterprise:disabled {
+            background: #cbd5e1;
             box-shadow: none;
             cursor: not-allowed;
             transform: none;
@@ -147,13 +187,13 @@
             padding: 14px;
             border-radius: 12px;
             text-align: center;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 600;
             animation: fadeIn 0.3s ease;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-5px); }
+            from { opacity: 0; transform: translateY(-4px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
@@ -162,30 +202,31 @@
         }
 
         .notification.success {
-            background-color: #e3f2fd;
-            color: #0d47a1;
-            border: 1px solid #bbdefb;
+            background-color: #eff6ff;
+            color: #1d4ed8;
+            border: 1px solid #bfdbfe;
         }
 
         .notification.error {
-            background-color: #ffebee;
-            color: #b71c1c; 
-            border: 1px solid #ffcdd2;
+            background-color: #fef2f2;
+            color: #b91c1c;
+            border: 1px solid #fecaca;
         }
 
+        /* Navigasi Bawah Modern */
         .bottom-nav {
-            position: fixed; 
+            position: fixed;
             bottom: 0;
             left: 0;
             width: 100%;
-            background-color: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(12px);
             display: flex;
             justify-content: space-around;
-            padding: 10px 0 14px 0;
-            box-shadow: 0 -4px 20px rgba(0,0,0,0.08);
+            padding: 12px 0 16px 0;
+            box-shadow: 0 -10px 25px rgba(0, 0, 0, 0.06);
             z-index: 100;
-            border-top: 1px solid rgba(0,0,0,0.05);
+            border-top: 1px solid rgba(226, 232, 240, 0.8);
         }
 
         .nav-item {
@@ -193,116 +234,123 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            color: #adb5bd; 
-            font-size: 12px;
-            font-weight: 600;
+            color: #94a3b8;
+            font-size: 11px;
+            font-weight: 700;
             gap: 4px;
-            transition: color 0.3s ease;
+            transition: color 0.25s ease;
         }
 
-.nav-item.active {
-            color: #c62828; 
-        }
-
-        .nav-item.active .nav-icon {
-            opacity: 1;
-            transform: scale(1.1);
+        .nav-item.active {
+            color: var(--primary);
         }
 
         .nav-icon {
-            font-size: 22px;
-            opacity: 0.7;
-            transition: transform 0.3s ease;
+            font-size: 20px;
+            transition: transform 0.25s ease;
+        }
+
+        .nav-item.active .nav-icon {
+            transform: scale(1.15);
         }
     </style>
 </head>
 <body>
-    <div class="top-bg">
-        <h1>ABSENSI X AK 2</h1>
-        <p>SMK Negeri 12 Jakarta</p>
-    </div>
 
-    <div class="card-container">
-        <div class="card-header">
-            📝 <span>Form Kehadiran</span>
+    <!-- Header Dashboard -->
+    <div class="app-header">
+        <div class="header-content">
+            <span class="badge-org">X AK 2 Official</span>
+            <h1>Absensi Kelas</h1>
+            <p>Sistem Kehadiran Siswa SMK Negeri 12 Jakarta</p>
         </div>
-        
-        <form id="absensiForm">
-            <div class="form-group">
-                <label for="nama">Pilih Nama Lengkap</label>
-                <select id="nama" name="nama" required>
-                    <option value="" disabled selected>-- Pilih Nama Anda --</option>
-                    <option value="A'ISY PUTRI RAHAYU" data-absen="1">1. A'ISY PUTRI RAHAYU</option>
-                    <option value="ANGEL SILVIANA" data-absen="2">2. ANGEL SILVIANA</option>
-                    <option value="ANGGITA PUTRI AULIA PANGGABEAN" data-absen="3">3. ANGGITA PUTRI AULIA PANGGABEAN</option>
-                    <option value="ARNHILDA VIVIA DANASTRI" data-absen="4">4. ARNHILDA VIVIA DANASTRI</option>
-                    <option value="AUREL ZAHRA SUTAWIJAYA" data-absen="5">5. AUREL ZAHRA SUTAWIJAYA</option>
-                    <option value="AZZAHRA APRILIYANI" data-absen="6">6. AZZAHRA APRILIYANI</option>
-                    <option value="CAHYA HALIMATUL AULIA" data-absen="7">7. CAHYA HALIMATUL AULIA</option>
-                    <option value="DALILATI BATRISYIA SAJIDAH" data-absen="8">8. DALILATI BATRISYIA SAJIDAH</option>
-                    <option value="DEVI SEFTIANA FITRI" data-absen="9">9. DEVI SEFTIANA FITRI</option>
-                    <option value="FARAH HASANAH PUTRI" data-absen="10">10. FARAH HASANAH PUTRI</option>
-                    <option value="GEISHAVINKA NAMIRA MALENGGA" data-absen="11">11. GEISHAVINKA NAMIRA MALENGGA</option>
-                    <option value="HAERANI NUR KAMILA" data-absen="12">12. HAERANI NUR KAMILA</option>
-                    <option value="HAMIDAH" data-absen="13">13. HAMIDAH</option>
-                    <option value="KEISHA NABILAH SAKHI" data-absen="14">14. KEISHA NABILAH SAKHI</option>
-                    <option value="KEISHA RAMADANTI EL CHAIRY" data-absen="15">15. KEISHA RAMADANTI EL CHAIRY</option>
-                    <option value="LUSIANAH JUNITA PUTRI" data-absen="16">16. LUSIANAH JUNITA PUTRI</option>
-                    <option value="MUTIARA LEDENSKI PANGARIBUAN" data-absen="17">17. MUTIARA LEDENSKI PANGARIBUAN</option>
-                    <option value="NABILLA NOER RAMADHANI" data-absen="18">18. NABILLA NOER RAMADHANI</option>
-                    <option value="NADIV YAQZAN RAY" data-absen="19">19. NADIV YAQZAN RAY</option>
-                    <option value="NATASYA AULIA PUTRI" data-absen="20">20. NATASYA AULIA PUTRI</option>
-                    <option value="PIKA APRIANTI" data-absen="21">21. PIKA APRIANTI</option>
-                    <option value="PUTRI AYU NABILA" data-absen="22">22. PUTRI AYU NABILA</option>
-                    <option value="PUTRI FETO ZAHIRAH" data-absen="23">23. PUTRI FETO ZAHIRAH</option>
-                    <option value="PUTRI REGINA" data-absen="24">24. PUTRI REGINA</option>
-                    <option value="RAFFINZA KHAIRISMA DESWIRA" data-absen="25">25. RAFFINZA KHAIRISMA DESWIRA</option>
-                    <option value="RAHMAT APRILLA SAMSONG" data-absen="26">26. RAHMAT APRILLA SAMSONG</option>
-                    <option value="ROIS HANIF ALFIROS" data-absen="27">27. ROIS HANIF ALFIROS</option>
-                    <option value="RUTH MEIQUILLA SYAH" data-absen="28">28. RUTH MEIQUILLA SYAH</option>
-                    <option value="SAFA LAILA RAMADHANI" data-absen="29">29. SAFA LAILA RAMADHANI</option>
-                    <option value="SHAFA RIZKI ALLIYAH" data-absen="30">30. SHAFA RIZKI ALLIYAH</option>
-                    <option value="SYIFA AZZAHRAH DAHLIA" data-absen="31">31. SYIFA AZZAHRAH DAHLIA</option>
-                    <option value="TSARAUNA AFIFA SHOLEHA" data-absen="32">32. TSARAUNA AFIFA SHOLEHA</option>
-                    <option value="ZALFA NAURA RIYANTI" data-absen="33">33. ZALFA NAURA RIYANTI</option>
-                    <option value="ZUL NAILA ASSYIFA" data-absen="34">34. ZUL NAILA ASSYIFA</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label for="no_absen">Nomor Absen</label>
-                <input type="number" id="no_absen" name="no_absen" min="1" max="34" placeholder="Terisi otomatis..." readonly required>
-            </div>
-
-            <div class="form-group">
-                <label>Status Kehadiran</label>
-                <select id="status" name="status" required>
-                    <option value="" disabled selected>Pilih Status...</option>
-                    <option value="Hadir">✅ Hadir</option>
-                    <option value="Izin">🟡 Izin</option>
-                    <option value="Sakit">🟠 Sakit</option>
-                    <option value="Alpha">🔴 Alpha</option>
-                </select>
-            </div>
-
-            <button type="submit" id="submitBtn">Kirim Kehadiran</button>
-        </form>
-
-        <div id="notification" class="notification hidden"></div>
     </div>
 
+    <!-- Konten Utama Form -->
+    <div class="main-container">
+        <div class="card">
+            <div class="card-title">
+                <span>📝</span> Form Kehadiran Harian
+            </div>
+            
+            <form id="absensiForm">
+                <div class="form-group">
+                    <label for="nama">Pilih Nama Lengkap</label>
+                    <select id="nama" name="nama" required>
+                        <option value="" disabled selected>-- Pilih Nama Anda --</option>
+                        <option value="A'ISY PUTRI RAHAYU" data-absen="1">1. A'ISY PUTRI RAHAYU</option>
+                        <option value="ANGEL SILVIANA" data-absen="2">2. ANGEL SILVIANA</option>
+                        <option value="ANGGITA PUTRI AULIA PANGGABEAN" data-absen="3">3. ANGGITA PUTRI AULIA PANGGABEAN</option>
+                        <option value="ARNHILDA VIVIA DANASTRI" data-absen="4">4. ARNHILDA VIVIA DANASTRI</option>
+                        <option value="AUREL ZAHRA SUTAWIJAYA" data-absen="5">5. AUREL ZAHRA SUTAWIJAYA</option>
+                        <option value="AZZAHRA APRILIYANI" data-absen="6">6. AZZAHRA APRILIYANI</option>
+                        <option value="CAHYA HALIMATUL AULIA" data-absen="7">7. CAHYA HALIMATUL AULIA</option>
+                        <option value="DALILATI BATRISYIA SAJIDAH" data-absen="8">8. DALILATI BATRISYIA SAJIDAH</option>
+                        <option value="DEVI SEFTIANA FITRI" data-absen="9">9. DEVI SEFTIANA FITRI</option>
+                        <option value="FARAH HASANAH PUTRI" data-absen="10">10. FARAH HASANAH PUTRI</option>
+                        <option value="GEISHAVINKA NAMIRA MALENGGA" data-absen="11">11. GEISHAVINKA NAMIRA MALENGGA</option>
+                        <option value="HAERANI NUR KAMILA" data-absen="12">12. HAERANI NUR KAMILA</option>
+                        <option value="HAMIDAH" data-absen="13">13. HAMIDAH</option>
+                        <option value="KEISHA NABILAH SAKHI" data-absen="14">14. KEISHA NABILAH SAKHI</option>
+                        <option value="KEISHA RAMADANTI EL CHAIRY" data-absen="15">15. KEISHA RAMADANTI EL CHAIRY</option>
+                        <option value="LUSIANAH JUNITA PUTRI" data-absen="16">16. LUSIANAH JUNITA PUTRI</option>
+                        <option value="MUTIARA LEDENSKI PANGARIBUAN" data-absen="17">17. MUTIARA LEDENSKI PANGARIBUAN</option>
+                        <option value="NABILLA NOER RAMADHANI" data-absen="18">18. NABILLA NOER RAMADHANI</option>
+                        <option value="NADIV YAQZAN RAY" data-absen="19">19. NADIV YAQZAN RAY</option>
+                        <option value="NATASYA AULIA PUTRI" data-absen="20">20. NATASYA AULIA PUTRI</option>
+                        <option value="PIKA APRIANTI" data-absen="21">21. PIKA APRIANTI</option>
+                        <option value="PUTRI AYU NABILA" data-absen="22">22. PUTRI AYU NABILA</option>
+                        <option value="PUTRI FETO ZAHIRAH" data-absen="23">23. PUTRI FETO ZAHIRAH</option>
+                        <option value="PUTRI REGINA" data-absen="24">24. PUTRI REGINA</option>
+                        <option value="RAFFINZA KHAIRISMA DESWIRA" data-absen="25">25. RAFFINZA KHAIRISMA DESWIRA</option>
+                        <option value="RAHMAT APRILLA SAMSONG" data-absen="26">26. RAHMAT APRILLA SAMSONG</option>
+                        <option value="ROIS HANIF ALFIROS" data-absen="27">27. ROIS HANIF ALFIROS</option>
+                        <option value="RUTH MEIQUILLA SYAH" data-absen="28">28. RUTH MEIQUILLA SYAH</option>
+                        <option value="SAFA LAILA RAMADHANI" data-absen="29">29. SAFA LAILA RAMADHANI</option>
+                        <option value="SHAFA RIZKI ALLIYAH" data-absen="30">30. SHAFA RIZKI ALLIYAH</option>
+                        <option value="SYIFA AZZAHRAH DAHLIA" data-absen="31">31. SYIFA AZZAHRAH DAHLIA</option>
+                        <option value="TSARAUNA AFIFA SHOLEHA" data-absen="32">32. TSARAUNA AFIFA SHOLEHA</option>
+                        <option value="ZALFA NAURA RIYANTI" data-absen="33">33. ZALFA NAURA RIYANTI</option>
+                        <option value="ZUL NAILA ASSYIFA" data-absen="34">34. ZUL NAILA ASSYIFA</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="no_absen">Nomor Absen</label>
+                    <input type="number" id="no_absen" name="no_absen" min="1" max="34" placeholder="Terisi otomatis..." readonly required>
+                </div>
+
+                <div class="form-group">
+                    <label for="status">Status Kehadiran</label>
+                    <select id="status" name="status" required>
+                        <option value="" disabled selected>Pilih Status...</option>
+                        <option value="Hadir">✅ Hadir</option>
+                        <option value="Izin">🟡 Izin</option>
+                        <option value="Sakit">🟠 Sakit</option>
+                        <option value="Alpha">🔴 Alpha</option>
+                    </select>
+                </div>
+
+                <button type="submit" id="submitBtn" class="btn-enterprise">Kirim Kehadiran</button>
+            </form>
+
+            <div id="notification" class="notification hidden"></div>
+        </div>
+    </div>
+
+    <!-- Navigasi Bawah -->
     <div class="bottom-nav">
         <a href="./index.html" class="nav-item active">
             <span class="nav-icon">📝</span>
-            <span class="nav-text">Absen</span>
+            <span>Absen</span>
         </a>
         <a href="./kas.html" class="nav-item">
-            <span class="nav-icon">💰</span>
-            <span class="nav-text">Kas Digital</span>
+            <span class="nav-icon">💳</span>
+            <span>Kas Digital</span>
         </a>
         <a href="./admin.html" class="nav-item">
             <span class="nav-icon">⚙️</span>
-            <span class="nav-text">Admin</span>
+            <span>Admin</span>
         </a>
     </div>
 
