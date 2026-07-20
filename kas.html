@@ -69,39 +69,45 @@
         }
 
         .qris-box {
-            background: #f8f9fa;
-            border: 2px dashed #dc3545;
-            padding: 40px 20px;
+            background: white;
+            padding: 15px;
             border-radius: 15px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            display: inline-block;
             margin-bottom: 20px;
+            max-width: 100%;
         }
 
-        .qris-box h2 {
-            font-size: 22px;
-            font-weight: 700;
-            color: #c62828;
-            letter-spacing: 2px;
-            margin-bottom: 5px;
-        }
-
-        .qris-box p {
-            font-size: 13px;
-            color: #666;
+        .qris-box img {
+            width: 100%;
+            max-width: 260px;
+            height: auto;
+            border-radius: 10px;
         }
 
         .info-text {
             font-size: 14px;
             color: #555;
             line-height: 1.6;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
 
-        .info-text strong {
-            color: #c62828;
+        .wa-btn {
+            display: inline-block;
+            width: 100%;
+            padding: 16px;
+            background-color: #25d366; 
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 700;
+            box-shadow: 0 4px 10px rgba(37, 211, 102, 0.3);
+            transition: background 0.3s;
+        }
+
+        .wa-btn:hover {
+            background-color: #1ebe5d; 
         }
 
         .bottom-nav {
@@ -154,14 +160,19 @@
         </div>
         
         <div class="qris-box">
-            <h2>COMING SOON</h2>
-            <p>Fitur pembayaran QRIS sedang disiapkan</p>
+            <!-- Pastikan nama file gambar QRIS sesuai -->
+            <img src="210103-clean.png" alt="QRIS Kas Digital X AK 2">
         </div>
 
         <div class="info-text">
-            Pembayaran kas digital menggunakan QRIS akan segera hadir di sini.<br>
-            <strong>Untuk sementara, silakan lakukan pembayaran kas secara langsung kepada bendahara kelas.</strong>
+            Sudah membayar kas? Silakan kirimkan bukti transaksi kamu melalui tombol di bawah ini:
         </div>
+
+        <!-- Tombol Kirim Bukti Transaksi ke WhatsApp dengan Teks Otomatis -->
+        <a href="https://wa.me/6285282331327?text=Assalamualaikum,%20saya%20ingin%20mengirimkan%20bukti%20pembayaran%20Kas%20Digital.%0A%0A-%20Nama%20Lengkap:%20%0A-%20Nomor%20Absen:%20%0A-%20Bulan%20Kas:%20%0A-%20Nominal:%20Rp%20%0A%0A(Lampirkan%20screenshot%20bukti%20transfer%20di%20bawah%20pesan%20ini)" 
+           class="wa-btn" target="_blank">
+            📱 Kirim Bukti Transaksi
+        </a>
     </div>
 
     <div class="bottom-nav">
@@ -180,4 +191,3 @@
     </div>
 </body>
 </html>
-
