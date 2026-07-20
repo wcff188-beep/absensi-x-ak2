@@ -6,6 +6,13 @@ function getDeviceType() {
     return "Desktop";
 }
 
+// Otomatis mengisi nomor absen berdasarkan nama yang dipilih di dropdown
+document.getElementById('nama').addEventListener('change', function() {
+    const selectedOption = this.options[this.selectedIndex];
+    const absenValue = selectedOption.getAttribute('data-absen');
+    document.getElementById('no_absen').value = absenValue || '';
+});
+
 document.getElementById('absensiForm').addEventListener('submit', async function(e) {
     e.preventDefault();
 
@@ -17,8 +24,8 @@ document.getElementById('absensiForm').addEventListener('submit', async function
     const formData = new FormData(form);
     const no_absen = formData.get('no_absen');
     
-    // Validasi Nomor Absen
-    if(no_absen < 1 || no_absen > 36) {
+    // Validasi Nomor Absen (Pastikan terisi dan di antara 1-36)
+    if(!no_absen || no_absen < 1 || no_absen > 36) {
         showNotif('Nomor absen harus antara 1 sampai 36.', 'error');
         return;
     }
@@ -58,6 +65,8 @@ document.getElementById('absensiForm').addEventListener('submit', async function
             
             showNotif('Data absen berhasil terkirim!', 'success');
             form.reset();
+            // Reset juga nilai nomor absen karena form.reset() kadang melewatkan input readonly
+            document.getElementById('no_absen').value = '';
         } else {
             showNotif('Gagal mengirim data. Coba lagi.', 'error');
         }
